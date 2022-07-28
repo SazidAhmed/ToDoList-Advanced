@@ -34,6 +34,14 @@ function CopyTable() {
     setInputFields(values);
   }
 
+  const copyThat = async (accountNumber) => {
+    if (accountNumber)
+      await navigator.clipboard.writeText(accountNumber)
+        .then((res) => {
+          console.log('Number copied successfully', res)
+        })
+  }
+
   return (
     <>
     <div className="container-fluid">
