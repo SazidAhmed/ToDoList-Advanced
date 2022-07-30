@@ -9,7 +9,7 @@ function CopyTable() {
     { id: uuidv4(), name: '', email: '', works_on_saturday:'' },
   ]);
 
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,18 +73,18 @@ function CopyTable() {
                   </thead>
                   <tbody>
                     <tr>
-                        <td>Jhon Doe</td><CopyToClipboard text={'Jhone Doe'} onCopy={()=> setCopied(true)}><button>Copy</button></CopyToClipboard>
-                        <td>jhon@gmail.com</td>
-                        <td>No</td>
+                      <CopyToClipboard text={'Jhone Doe'} onCopy={()=> setCopied('Jhone Doe')}><td>Jhon Doe</td></CopyToClipboard>
+                      <CopyToClipboard text={'jhon@gmail.com'} onCopy={()=> setCopied(true)}><td>jhon@gmail.com</td></CopyToClipboard>
+                      <CopyToClipboard text={'No'} onCopy={()=> setCopied(true)}><td>No</td></CopyToClipboard>
                     </tr>
                     <tr>
-                        <td>Jhonny Doe</td>
-                        <td>jhonny@gmail.com</td>
-                        <td>Yes</td>
+                      <CopyToClipboard text={'Jhonny Doe'} onCopy={()=> setCopied(true)}><td>Jhonny Doe</td></CopyToClipboard>
+                      <CopyToClipboard text={'jhonny@gmail.com'} onCopy={()=> setCopied(true)}><td>jhonny@gmail.com</td></CopyToClipboard>
+                      <CopyToClipboard text={'Yes'} onCopy={()=> setCopied(true)}><td>Yes</td></CopyToClipboard>
                     </tr>
                   </tbody>
               </table>
-              {copied ? <span style={{color : 'green'}}>Copied</span>: null}
+              {copied ? <span style={{color : 'green'}}>Copied : {copied}</span>: null}
           </div>
           <div className="col col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
                 <div className="row">
