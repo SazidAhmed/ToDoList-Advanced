@@ -14,6 +14,13 @@ function CopyTable() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("InputFields", inputFields);
+    const appData = localStorage.getItem('appData');
+    if(appData){
+      // setAccount(JSON.parse(appData));
+      console.log(appData)
+    }else{
+      localStorage.setItem('appData', JSON.stringify(inputFields));
+    }
   };
 
   const handleChangeInput = (id, event) => {
@@ -36,28 +43,7 @@ function CopyTable() {
     values.splice(values.findIndex(value => value.id === id), 1);
     setInputFields(values);
   }
-
-  // async function copyTextToClipboard(text) {
-  //   if ('clipboard' in navigator) {
-  //     return await navigator.clipboard.writeText(text);
-  //   } else {
-  //     return document.execCommand('copy', true, text);
-  //   }
-  // }
-
-  // const handleCopyClick = () => {
-  //   copyTextToClipboard(copyText)
-  //     .then(() => {
-  //       setIsCopied(true);
-  //       setTimeout(() => {
-  //         setIsCopied(false);
-  //       }, 1500);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
+  
   return (
     <div className="container-fluid">
       <div className="row">
@@ -74,13 +60,13 @@ function CopyTable() {
                   <tbody>
                     <tr>
                       <CopyToClipboard text={'Jhone Doe'} onCopy={()=> setCopied('Jhone Doe')}><td>Jhon Doe</td></CopyToClipboard>
-                      <CopyToClipboard text={'jhon@gmail.com'} onCopy={()=> setCopied(true)}><td>jhon@gmail.com</td></CopyToClipboard>
-                      <CopyToClipboard text={'No'} onCopy={()=> setCopied(true)}><td>No</td></CopyToClipboard>
+                      <CopyToClipboard text={'jhon@gmail.com'} onCopy={()=> setCopied('jhon@gmail.com')}><td>jhon@gmail.com</td></CopyToClipboard>
+                      <CopyToClipboard text={'No'} onCopy={()=> setCopied('No')}><td>No</td></CopyToClipboard>
                     </tr>
                     <tr>
-                      <CopyToClipboard text={'Jhonny Doe'} onCopy={()=> setCopied(true)}><td>Jhonny Doe</td></CopyToClipboard>
-                      <CopyToClipboard text={'jhonny@gmail.com'} onCopy={()=> setCopied(true)}><td>jhonny@gmail.com</td></CopyToClipboard>
-                      <CopyToClipboard text={'Yes'} onCopy={()=> setCopied(true)}><td>Yes</td></CopyToClipboard>
+                      <CopyToClipboard text={'Jhonny Doe'} onCopy={()=> setCopied('Jhonny Doe')}><td>Jhonny Doe</td></CopyToClipboard>
+                      <CopyToClipboard text={'jhonny@gmail.com'} onCopy={()=> setCopied('jhonny@gmail.com')}><td>jhonny@gmail.com</td></CopyToClipboard>
+                      <CopyToClipboard text={'Yes'} onCopy={()=> setCopied('Yes')}><td>Yes</td></CopyToClipboard>
                     </tr>
                   </tbody>
               </table>
