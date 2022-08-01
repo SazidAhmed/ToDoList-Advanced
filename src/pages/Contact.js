@@ -118,7 +118,7 @@ function CopyTable() {
         </div>
       </div>
       <div className="row">
-          <h5 className='mt-5'>Click to copy and paste to the input field : </h5>
+          <h5 className='mt-2'>App Data Table : </h5>
           <div className="col col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 p-3">
               <table className='table table-striped table-bordered table-hover'>
                   <thead>

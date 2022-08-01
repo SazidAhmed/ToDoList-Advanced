@@ -7,7 +7,7 @@ function Home() {
 
   const monday = mondaySdk();
   const url = '/v2'
-  const mondayAuthToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE2NTA1MDEyNCwidWlkIjozMDY3MDYxNiwiaWFkIjoiMjAyMi0wNi0xMFQyMDoyMDoyOC45NjRaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTIyMzIzMTIsInJnbiI6InVzZTEifQ.CCucZ5od4FS8_JpkbROF7ssUCc3dVxU3cK0I5kwp-cY';
+  const mondayAuthToken = process.env.REACT_APP_API_KEY
 
   let query =`
   {
@@ -36,7 +36,7 @@ function Home() {
       {
         method: 'post',
         headers: {
-          'Content-Type': 'DraggableTablelication/json',
+          'Content-Type': 'application/json',
           'Authorization' : mondayAuthToken
          },
          body: JSON.stringify({
@@ -79,7 +79,7 @@ function Home() {
                 <tbody>
                   { boardData && 
                   boardData.map(data =>(
-                    <tr>
+                    <tr key={data.id}>
                       <td>
                           <div className="form-check">
                               <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
