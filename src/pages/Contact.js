@@ -3,6 +3,9 @@ import { FaRegCheckCircle, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+//components 
+import DataTable from '../components/reUsable/Table';
+
 function CopyTable() {
 
   const [inputFields, setInputFields] = useState([
@@ -13,11 +16,11 @@ function CopyTable() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("InputFields", inputFields);
-    const appData = localStorage.getItem('appData');
-    if(appData){
-      // setAccount(JSON.parse(appData));
-      console.log(appData)
+    const localData = localStorage.getItem('appData');
+    if(localData !== null){
+      var existingData = JSON.parse(localData);
+      const newData = existingData.concat(inputFields)
+      localStorage.setItem('appData', JSON.stringify(newData));
     }else{
       localStorage.setItem('appData', JSON.stringify(inputFields));
     }
