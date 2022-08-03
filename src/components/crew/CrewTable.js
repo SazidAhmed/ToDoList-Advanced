@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const DataTable = ({ tableData }) => {
+const CrewTable = ({ crewData }) => {
   return ( 
     <div className="blog-list">
       <table className='table table-striped table-bordered table-hover'>
@@ -12,7 +12,7 @@ const DataTable = ({ tableData }) => {
             </tr>
         </thead>
         <tbody>
-          {tableData.map((data)=>(
+          {crewData.map((data)=>(
             <tr>
               <td>Jhon Doe</td>
               <td>jhon@gmail.com</td>
@@ -25,4 +25,4 @@ const DataTable = ({ tableData }) => {
   );
 }
 
-export default DataTable;
+export default CrewTable;

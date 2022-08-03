@@ -48,7 +48,7 @@ function Home() {
         return res.json()
       })
       .then(res => {
-        console.log(JSON.stringify(res.data.boards[0].items, null, 2))
+        // console.log(JSON.stringify(res.data.boards[0].items, null, 2))
         setBoardData(res.data.boards[0].items)
       })
       .catch(err=>{
