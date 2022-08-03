@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaRegCheckCircle, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -13,6 +13,8 @@ function CopyTable() {
   ]);
 
   const [copied, setCopied] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [localStorageData, setLocalStorageData] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ function CopyTable() {
     }else{
       localStorage.setItem('appData', JSON.stringify(inputFields));
     }
+    setSubmitted(true);
   };
 
   const handleChangeInput = (id, event) => {
@@ -46,6 +49,21 @@ function CopyTable() {
     values.splice(values.findIndex(value => value.id === id), 1);
     setInputFields(values);
   }
+
+  //Get data from local storage to display on the table
+  const getLocalData = ()=>{
+    const localData = localStorage.getItem('appData');
+    if(localData !== null){
+      var existingData = JSON.parse(localData);
+      setLocalStorageData(existingData);
+      console.log('hook', localStorageData)
+    }
+  }
+
+   //Hook
+   useEffect(()=>{
+    getLocalData()
+  }, [submitted]);
   
   return (
     <div className="container-fluid">
