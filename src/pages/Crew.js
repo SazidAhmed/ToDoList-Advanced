@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 
 //components 
 import CrewTable from '../components/crew/CrewTable';
-import UserTable from '../components/crew/UserTable';
-import CrewForm from '../components/crew/CrewForm';
 
 function Crews() {
 
@@ -22,7 +20,7 @@ function Crews() {
    //Hook
    useEffect(()=>{
     getLocalData()
-  }, []);
+  }, [localStorageData]);
   
   return (
     <div className="container-fluid">
