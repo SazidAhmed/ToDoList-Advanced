@@ -1,107 +1,42 @@
 import { useState, useEffect } from 'react';
-import mondaySdk from "monday-sdk-js";
-import { FaRegCheckCircle } from 'react-icons/fa';
 
-function Home() {
-  const [boardData, setBoardData] = useState(null);
+//components 
+import CrewTable from '../components/crew/CrewTable';
+import UserTable from '../components/crew/UserTable';
+import CrewForm from '../components/crew/CrewForm';
 
-  const monday = mondaySdk();
-  const url = '/v2'
-  const mondayAuthToken = process.env.REACT_APP_API_KEY
+function CopyTable() {
 
-  let query =`
-  {
-    boards(ids: 2752311453) {
-      items {
-        id
-        name
-        column_values {
-          id
-          value
-          title
-          text
-        }
-      }
+  const [localStorageData, setLocalStorageData] = useState([]);
+
+  //Get data from local storage to display on the table
+  const getLocalData = ()=>{
+    const localData = localStorage.getItem('appData');
+    if(localData !== null){
+      var existingData = JSON.parse(localData);
+      setLocalStorageData(existingData);
+      console.log('hook', localStorageData)
     }
   }
-  `
 
-  //Hook
-  useEffect(()=>{
-    getBoardData()
+   //Hook
+   useEffect(()=>{
+    getLocalData()
   }, []);
-
-  const getBoardData = ()=>{
-    fetch(url,
-      {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization' : mondayAuthToken
-         },
-         body: JSON.stringify({
-           'query' : query
-         })
-        }
-      )
-      .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        // console.log(JSON.stringify(res.data.boards[0].items, null, 2))
-        setBoardData(res.data.boards[0].items)
-      })
-      .catch(err=>{
-       console.log(err)
-      })
-  }
-
-   return (
-    <div className="container">
+  
+  return (
+    <div className="container-fluid">
       <div className="row">
-        <h5 className='mt-5'>Select Crews : </h5>
-        <div className="col col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3">
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                    <b>Select All</b>
-                </label>
-            </div>
-            <table className='table table-striped table-bordered table-hover'>
-                <thead>
-                    <tr>
-                        <th>Select</th>
-                        <th>Crew</th>
-                        <th>Email</th>
-                        <th>Work On Saturday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  { boardData && 
-                  boardData.map(data =>(
-                    <tr key={data.id}>
-                      <td>
-                          <div className="form-check">
-                              <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                          </div>
-                      </td>
-                      <td>{data.name}</td>
-                      <td>{data.column_values[1].text}</td>
-                      <td>{data.column_values[2].text}</td>
-                  </tr>
-                  ))
-                  }
-                </tbody>
-            </table>
+        <h5 className='mt-5'>Click to copy and paste to the input field : </h5>
+        <div className="col col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 p-3">
+          <UserTable />
         </div>
-      </div>
-      <div className="row">
-        <div className="d-flex ">
-            <button type="button" className="btn btn-success"><FaRegCheckCircle /> Success</button>
+        <div className="col col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+          <CrewForm />
         </div>
       </div>
     </div>
   );
 }
 
-export default Home;
+export default CopyTable;

@@ -11,7 +11,7 @@ const Topnav = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/contact" className="nav-link active">Contact</Link>
+              <Link to="/crew" className="nav-link active">Crew</Link>
             </li>
           </ul>
         </div>
