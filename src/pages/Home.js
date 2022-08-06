@@ -1,28 +1,9 @@
-import { useState, useEffect } from 'react';
 
-//components 
-import CrewTable from '../components/crew/CrewTable';
+//components
 import UserTable from '../components/crew/UserTable';
 import CrewForm from '../components/crew/CrewForm';
 
-function CopyTable() {
-
-  const [localStorageData, setLocalStorageData] = useState([]);
-
-  //Get data from local storage to display on the table
-  const getLocalData = ()=>{
-    const localData = localStorage.getItem('appData');
-    if(localData !== null){
-      var existingData = JSON.parse(localData);
-      setLocalStorageData(existingData);
-      console.log('hook', localStorageData)
-    }
-  }
-
-   //Hook
-   useEffect(()=>{
-    getLocalData()
-  }, []);
+function Home() {
   
   return (
     <div className="container-fluid">
@@ -39,4 +20,4 @@ function CopyTable() {
   );
 }
 
-export default CopyTable;
+export default Home;

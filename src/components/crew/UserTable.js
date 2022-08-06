@@ -61,9 +61,9 @@ function UserTable() {
         <table className='table table-striped table-bordered table-hover'>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Work On Saturday</th>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                    <th>Column 3</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ function UserTable() {
         ? 
         <div className="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Copied : </strong> {copied}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         : null}
     </>
