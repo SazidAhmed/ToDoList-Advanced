@@ -13,6 +13,9 @@ const Topnav = () => {
             <li className="nav-item">
               <Link to="/crew" className="nav-link active">Crew</Link>
             </li>
+            <li className="nav-item">
+              <Link to="/auth" className="nav-link active">Authentication</Link>
+            </li>
           </ul>
         </div>
       </div>
