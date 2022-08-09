@@ -4,17 +4,22 @@ import Home from './pages/Home';
 import Crew from './pages/Crew';
 import Auth from './pages/Auth';
 
+//Contexts
+import AuthContextProvider from './contexts/AuthContext';
+
 function App() {
 
   return (
   <>
     <BrowserRouter>
-      <Topnav />
-      <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/crew" element={<Crew />} />
-          <Route path="/auth" element={<Auth />} />
-      </Routes>
+      <AuthContextProvider>
+        <Topnav />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/crew" element={<Crew />} />
+            <Route path="/auth" element={<Auth />} />
+        </Routes>
+      </AuthContextProvider>
     </BrowserRouter>
   </>
   );

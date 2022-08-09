@@ -1,0 +1,14 @@
+query {
+  boards () {
+    id      
+    name   
+    items { 
+      id   
+      name  
+      column_values { 
+        id           
+        text          
+      }
+    }
+  }
+}
