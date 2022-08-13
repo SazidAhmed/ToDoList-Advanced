@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 function Auth() {
   const [authKey, setAuthKey] = useState('');
   const [isAuth, setIsAuth] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const url = '/v2'
   const mondayAuthToken = process.env.REACT_APP_API_KEY
@@ -15,19 +16,17 @@ function Auth() {
     }
   }
   `
-
   //Hook
-  useEffect(()=>{
-    getBoardData()
-  }, []);
 
   const getBoardData = ()=>{
+    const mondayAuthKey = localStorage.getItem('mondayAuthKey');
+    console.log(mondayAuthKey)
     fetch(url,
       {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : authKey
+          'Authorization' : mondayAuthKey
          },
          body: JSON.stringify({
            'query' : query
@@ -38,11 +37,16 @@ function Auth() {
         return res.json()
       })
       .then(res => {
-        console.log(res)
-        isAuth(true)
+        console.log(res.errors)
+        if(res.errors === 'Not Authenticated'){
+          console.log('Not Authenticated')
+          setIsError(true)
+        }
+        setIsAuth(true)
       })
       .catch(err=>{
        console.log(err)
+       setIsError(true)
       })
   }
 
@@ -51,6 +55,7 @@ function Auth() {
     console.log(authKey);
     localStorage.setItem('mondayAuthKey', JSON.stringify(authKey));
     setAuthKey('')
+    getBoardData()
   }
   
   return (
@@ -66,6 +71,12 @@ function Auth() {
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
+          {isError &&
+          <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Insert a valid API Key</strong>
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          }
         </div>
         <div className="col col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
           

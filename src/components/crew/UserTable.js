@@ -33,6 +33,7 @@ function UserTable() {
   }, []);
 
   const getBoardData = ()=>{
+    
     fetch(url,
       {
         method: 'post',
