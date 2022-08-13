@@ -19,14 +19,16 @@ function Auth() {
   //Hook
 
   const getBoardData = ()=>{
-    const mondayAuthKey = localStorage.getItem('mondayAuthKey');
-    console.log(mondayAuthKey)
+    const authData = localStorage.getItem('mondayAuthKey');
+    const authToken = JSON.parse(authData);
+    console.log('1',authToken)
+    console.log('2',mondayAuthToken)
     fetch(url,
       {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : mondayAuthKey
+          'Authorization' : authToken
          },
          body: JSON.stringify({
            'query' : query
@@ -37,11 +39,13 @@ function Auth() {
         return res.json()
       })
       .then(res => {
-        console.log(res.errors)
         if(res.errors === 'Not Authenticated'){
+          console.log(res.errors)
           console.log('Not Authenticated')
           setIsError(true)
         }
+        console.log('account_id : ', res.account_id)
+        console.log('data', res.data)
         setIsAuth(true)
       })
       .catch(err=>{
@@ -52,7 +56,6 @@ function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(authKey);
     localStorage.setItem('mondayAuthKey', JSON.stringify(authKey));
     setAuthKey('')
     getBoardData()
